@@ -5,6 +5,7 @@ import { Card } from "../components/Card";
 import { LoadingRect, SortCard } from "../components/Skeleton";
 import { useAppDispatch, useAppSelector, useUnits } from "../redux/hooks";
 import { count, getLists, list, setAdding, setLoading, status } from "../redux/slices/listSlice";
+import FlashMessage from "react-native-flash-message";
 
 const units = useUnits()
 
@@ -50,7 +51,7 @@ export default function Home() {
             return;
         } else {
             dispatch(setAdding())
-            dispatch(getLists({ page: page + 1, lastIndex: items.length }))
+            dispatch(getLists({ page: page + 1, lastIndex: items[items.length -1].id }))
             setPage(page + 1);
         }
     }
@@ -70,7 +71,7 @@ export default function Home() {
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item, index) => item.id.toString()}
                     renderItem={({ item, index }) => (
-                        <Card index={index} item={item} key={index} />
+                        <Card index={index} item={item} key={index} refresh={onRefresh}/>
                     )}
                     ListHeaderComponent={() => (
                         <View style={{ marginVertical: 1 * units.vh }} />
@@ -107,6 +108,7 @@ export default function Home() {
                 />
             </View>
             <Text>fdsf</Text>
+            <FlashMessage position='center' style={{ height: units.vh * 10, width: units.vw * 70, justifyContent: 'center', alignItems: 'center'}}/> 
         </SafeAreaView>
     )
 }

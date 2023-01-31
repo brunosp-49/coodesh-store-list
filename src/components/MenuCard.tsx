@@ -2,14 +2,20 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useState, useRef, FC } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
+interface Props{
+    edit: boolean,
+    deleting: boolean,
+    setEdit: (e: boolean) => void,
+    setDelete: (e: boolean) => void,
+}
 
-export const MenuCard = () => {
+export const MenuCard: FC<Props> = ({edit, setEdit, setDelete, deleting}) => {
     const editPost = () => {
-        console.log('edit')
+        setEdit(true)
     }
 
     const deletePost = () => {
-        console.log('deletePost')
+        setDelete(true)
     }
 
     return (
@@ -46,12 +52,12 @@ const OptionMenu: FC<OptionMenu> = ({ actions, customButton, destructiveIndex, p
                 }
             }
         }
+        setOpen(false)
     }
 
     return (
         <TouchableOpacity style={style.container} onPress={() => {
             setOpen(!open)
-            console.log(propsOptions)
         }}>
             <Ionicons name="ios-ellipsis-horizontal" size={24} color="black" />
             {!open

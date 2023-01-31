@@ -60,6 +60,6 @@ const styles = StyleSheet.create({
         color: '#aaa',
     },
     starSelected: {
-        color: '#ffb300',
+        color: '#105fe7',
     },
 });
